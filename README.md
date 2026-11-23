@@ -7,7 +7,8 @@ How does the number of retrieved documents (Top-K) change answer quality and
 Final assignment for *Kapita Selekta Sistem Cerdas* by **Aldi** (retrieval
 pipeline) and **Haiqal** (generation, evaluation and the live demo).
 
-**▶ Try it live:** RAG Lab on Hugging Face Spaces *(link coming soon)*
+**▶ Try it:** RAG Lab *(link coming soon)*. Explore real answers to all 764
+questions at four values of K and see where the model hallucinates.
 
 ## Results
 
@@ -44,9 +45,15 @@ good test of whether a model admits it doesn't know.
 |---|---|
 | `fixed_notebook(1).ipynb` | The full experiment (Colab, GPU) |
 | `Final_Assignment_Kapita_Selekta_Aldi___Haiqal.pdf` | The report |
-| `demo/` | RAG Lab, the live Gradio demo (runs on CPU) |
+| `web/` | RAG Lab website: static HTML/JS over precomputed answers, deployed on Vercel |
+| `demo/` | Live Gradio version that runs the model (CPU), plus the precompute scripts |
 
-### Run the demo locally
+The website needs no server: `demo/precompute_all.py` ran the model on every
+validation question at K = 1, 3, 5 and 10 and saved the answers, retrieved
+documents and checks to `web/data/`. Preview it with
+`python3 -m http.server -d web 5180`.
+
+### Run the live demo locally
 
 ```bash
 python3.12 -m venv .venv

@@ -6,3 +6,4 @@ __pycache__/
 .env
 .env*.local
 .claude/settings.local.json
+web/data/.progress.json

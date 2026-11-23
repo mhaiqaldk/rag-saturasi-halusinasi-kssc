@@ -1,29 +1,24 @@
----
-title: RAG Lab
-emoji: 🔎
-colorFrom: red
-colorTo: gray
-sdk: gradio
-sdk_version: 5.50.0
-python_version: "3.12"
-app_file: app.py
-pinned: false
-short_description: Watch an AI cite sources, or make things up, as K changes
----
+# RAG Lab: live version (Gradio)
 
-# RAG Lab
+The online site (`web/`) shows answers the model generated ahead of time.
+This folder runs the model **live**, so you can type your own questions.
 
-Live demo of **"Analisis Saturasi & Halusinasi pada RAG"**: how the number of
-retrieved documents (Top-K) changes answer quality and citation hallucination
-in an Indonesian RAG system.
+```bash
+python3.12 -m venv .venv
+.venv/bin/pip install -r demo/requirements.txt
+cd demo && ../.venv/bin/python app.py   # http://127.0.0.1:7860
+```
 
-- **Ask:** type a question or pick an example, choose K, and see the answer,
-  its citations, the retrieved documents and automatic checks.
-- **Compare K:** the same question answered at K = 1, 3, 5 and 10.
-- **Findings:** the results from the paper.
+The first run downloads Qwen2.5-1.5B-Instruct (about 3 GB). Answers take a few
+seconds on a laptop CPU.
 
-Stack: IDK-MRC dataset, multilingual MiniLM embeddings + FAISS for search,
-Qwen2.5-1.5B-Instruct on CPU for answers, Gradio for the interface.
+| File | What it does |
+|---|---|
+| `rag.py` | Retrieval, generation and citation checks, ported from the notebook |
+| `app.py`, `style.css` | The Gradio interface |
+| `build_data.py` | Writes the 12 featured sample questions to `data/samples.json` |
+| `precompute_compare.py` | Answers the samples at every K for the Compare tab |
+| `precompute_all.py` | Answers all 764 questions at every K for the static site (`web/data/`) |
 
-Research and code: https://github.com/mhaiqaldk/rag-saturasi-halusinasi-kssc
-By Aldi (retrieval) and Haiqal (generation, evaluation and this demo).
+On macOS, `torch` must be imported before `faiss`, or Python crashes; `rag.py`
+already does this.

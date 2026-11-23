@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RAG Lab · when does an AI make things up?</title>
+  <meta name="description" content="Pick a question, choose how many documents an AI reads, and watch when it cites its sources correctly and when it hallucinates. A live research demo by Haiqal and Aldi.">
+  <meta name="theme-color" content="#0F0E13">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="RAG Lab · Watch an AI make things up">
+  <meta property="og:description" content="More documents, more hallucination? Explore 3,000 real answers from an Indonesian RAG system.">
+  <meta property="og:image" content="/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="wrap">
+    <header class="hero">
+      <div class="glow" aria-hidden="true"></div>
+      <span class="eyebrow">RAG Lab · research demo</span>
+      <h1>Watch an AI make things&nbsp;up</h1>
+      <p>Pick a question, choose how many documents the model reads (K), and see when it cites its sources correctly and when it hallucinates.</p>
+      <a class="repo-link" href="https://github.com/mhaiqaldk/rag-saturasi-halusinasi-kssc" target="_blank" rel="noopener">Read the research ↗</a>
+    </header>
+
+    <nav class="tabs" role="tablist" aria-label="Sections">
+      <button role="tab" id="tab-explore" aria-controls="explore" aria-selected="true">Explore</button>
+      <button role="tab" id="tab-compare" aria-controls="compare" aria-selected="false">Compare K</button>
+      <button role="tab" id="tab-findings" aria-controls="findings" aria-selected="false">Findings</button>
+    </nav>
+
+    <section id="explore" role="tabpanel" aria-labelledby="tab-explore">
+      <div class="grid">
+        <div class="panel controls">
+          <label class="label" for="search">Question</label>
+          <div class="search-box">
+            <input id="search" type="search" autocomplete="off" placeholder="Search all 764 questions…">
+            <div id="results" class="results" role="listbox" hidden></div>
+          </div>
+          <div class="label">Documents to read (K)</div>
+          <div class="seg" id="k-picker" role="radiogroup" aria-label="Documents to read"></div>
+          <p class="hint">Low K: may miss the source. High K: more noise.</p>
+          <button id="random" class="btn-secondary" type="button">Random question</button>
+          <div class="label examples-label">Try these</div>
+          <div id="featured" class="chips"></div>
+        </div>
+        <div class="output" id="output" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section id="compare" role="tabpanel" aria-labelledby="tab-compare" hidden></section>
+    <section id="findings" role="tabpanel" aria-labelledby="tab-findings" hidden></section>
+
+    <footer class="foot">Built by Haiqal &amp; Aldi · answers generated with Qwen2.5-1.5B-Instruct</footer>
+  </main>
+  <script src="/app.js" defer></script>
+</body>
+</html>
