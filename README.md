@@ -7,7 +7,7 @@ How does the number of retrieved documents (Top-K) change answer quality and
 Final assignment for *Kapita Selekta Sistem Cerdas* by **Aldi** (retrieval
 pipeline) and **Haiqal** (generation, evaluation and the live demo).
 
-**▶ Try it:** RAG Lab *(link coming soon)*. Explore real answers to all 764
+**▶ Try it: [RAG Lab](https://rag-saturasi-halusinasi-kssc.vercel.app)**. Explore real answers to all 764
 questions at four values of K and see where the model hallucinates.
 
 ## Results
