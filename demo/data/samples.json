@@ -1,0 +1,86 @@
+[
+  {
+    "question": "Apa kepanjangan dari GPS?",
+    "english": "What does GPS stand for?",
+    "answerable": true,
+    "gold_answer": "Global Positioning System",
+    "gold_doc_id": 0
+  },
+  {
+    "question": "Apakah jenis hiu terkecil di dunia?",
+    "english": "What is the smallest shark in the world?",
+    "answerable": false,
+    "gold_answer": null,
+    "gold_doc_id": 6
+  },
+  {
+    "question": "Apakah nama lagu kebangsaan Jepang?",
+    "english": "What is Japan's national anthem called?",
+    "answerable": true,
+    "gold_answer": "Kimigayo",
+    "gold_doc_id": 258
+  },
+  {
+    "question": "Kapan telepon pertama kali digunakan di Indonesia ?",
+    "english": "When was the telephone first used in Indonesia?",
+    "answerable": true,
+    "gold_answer": "16 Oktober 1882",
+    "gold_doc_id": 126
+  },
+  {
+    "question": "Kapan telepon pertama kali digunakan di China?",
+    "english": "When was the telephone first used in China?",
+    "answerable": false,
+    "gold_answer": null,
+    "gold_doc_id": 126
+  },
+  {
+    "question": "apakah nama mata uang Taiwan ?",
+    "english": "What is Taiwan's currency called?",
+    "answerable": true,
+    "gold_answer": "New Taiwan Dollar",
+    "gold_doc_id": 90
+  },
+  {
+    "question": "Kapan PDI dibubarkan?",
+    "english": "When was the PDI party dissolved?",
+    "answerable": false,
+    "gold_answer": null,
+    "gold_doc_id": 102
+  },
+  {
+    "question": "Kapan Walt Disney Animation Studios berdiri ?",
+    "english": "When was Walt Disney Animation Studios founded?",
+    "answerable": true,
+    "gold_answer": "16 Oktober 1923",
+    "gold_doc_id": 288
+  },
+  {
+    "question": "Siapakah nama suami Sir Alexander Chapman \"Alex\" Ferguson?",
+    "english": "What is the name of Sir Alex Ferguson's husband?",
+    "answerable": false,
+    "gold_answer": null,
+    "gold_doc_id": 294
+  },
+  {
+    "question": "dari manakah tari angin mamiri berasal?",
+    "english": "Where does the Angin Mamiri dance come from?",
+    "answerable": true,
+    "gold_answer": "suku Bugis di Sulawesi Selatan",
+    "gold_doc_id": 264
+  },
+  {
+    "question": "Kapan Toko Gunung Agung ditutup?",
+    "english": "When did the Gunung Agung bookstore close?",
+    "answerable": false,
+    "gold_answer": null,
+    "gold_doc_id": 180
+  },
+  {
+    "question": "Apakah jenis hiu terbesar di dunia ?",
+    "english": "What is the largest shark in the world?",
+    "answerable": true,
+    "gold_answer": "megalodon",
+    "gold_doc_id": 6
+  }
+]

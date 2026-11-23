@@ -1,0 +1,776 @@
+{
+  "Apa kepanjangan dari GPS?": [
+    {
+      "k": 1,
+      "answer": "Global Positioning System (GPS) [1].",
+      "doc_ids": [
+        0
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": true,
+      "admitted_unknown": false
+    },
+    {
+      "k": 3,
+      "answer": "Kepanjangan dari GPS adalah Global Positioning System [1].",
+      "doc_ids": [
+        0,
+        225,
+        80
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": true,
+      "admitted_unknown": false
+    },
+    {
+      "k": 5,
+      "answer": "Global Positioning System (GPS) [1].",
+      "doc_ids": [
+        0,
+        225,
+        80,
+        150,
+        235
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": true,
+      "admitted_unknown": false
+    },
+    {
+      "k": 10,
+      "answer": "Global Positioning System (GPS) [1].",
+      "doc_ids": [
+        0,
+        225,
+        80,
+        150,
+        235,
+        184,
+        263,
+        164,
+        357,
+        334
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": true,
+      "admitted_unknown": false
+    }
+  ],
+  "Apakah jenis hiu terkecil di dunia?": [
+    {
+      "k": 1,
+      "answer": "Tidak tahu. [1]",
+      "doc_ids": [
+        61
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": false,
+      "admitted_unknown": true
+    },
+    {
+      "k": 3,
+      "answer": "Hiu terkecil di dunia adalah hiu putih [1].",
+      "doc_ids": [
+        61,
+        6,
+        1
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": false,
+      "admitted_unknown": false
+    },
+    {
+      "k": 5,
+      "answer": "Hiu terkecil di dunia adalah hiu putih [1].",
+      "doc_ids": [
+        61,
+        6,
+        1,
+        2,
+        134
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": false,
+      "admitted_unknown": false
+    },
+    {
+      "k": 10,
+      "answer": "Hiu terkecil di dunia adalah hiu putih, yang juga dikenal sebagai megalemon atau megalemon shark. Hiu ini termasuk dalam kelompok megalemons, yang merupakan subkelompok hiu yang terdiri dari hiu raksasa dan hiu harimau-pasir. Hiu ini memiliki panjang maksimum mencapai 18 meter dan berat sekitar 1 ton. [2]",
+      "doc_ids": [
+        61,
+        6,
+        1,
+        2,
+        134,
+        321,
+        246,
+        179,
+        194,
+        76
+      ],
+      "cited": [
+        2
+      ],
+      "citation_correct": true,
+      "admitted_unknown": false
+    }
+  ],
+  "Apakah nama lagu kebangsaan Jepang?": [
+    {
+      "k": 1,
+      "answer": "Nama lagu kebangsaan Jepang adalah Kimigayo [1].",
+      "doc_ids": [
+        258
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": true,
+      "admitted_unknown": false
+    },
+    {
+      "k": 3,
+      "answer": "Lagu kebangsaan Jepang adalah Kimigayo [1].",
+      "doc_ids": [
+        258,
+        243,
+        269
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": true,
+      "admitted_unknown": false
+    },
+    {
+      "k": 5,
+      "answer": "Kimigayo [1].",
+      "doc_ids": [
+        258,
+        243,
+        269,
+        211,
+        264
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": true,
+      "admitted_unknown": false
+    },
+    {
+      "k": 10,
+      "answer": "Nama lagu kebangsaan Jepang adalah Kimigayo [1].",
+      "doc_ids": [
+        258,
+        243,
+        269,
+        211,
+        264,
+        315,
+        249,
+        323,
+        69,
+        355
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": true,
+      "admitted_unknown": false
+    }
+  ],
+  "Kapan telepon pertama kali digunakan di Indonesia ?": [
+    {
+      "k": 1,
+      "answer": "Telepon pertama kali digunakan di Indonesia pada tanggal 16 Oktober 1882 [1].",
+      "doc_ids": [
+        126
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": true,
+      "admitted_unknown": false
+    },
+    {
+      "k": 3,
+      "answer": "Telepon pertama kali digunakan di Indonesia pada tanggal 16 Oktober 1882 [1].",
+      "doc_ids": [
+        126,
+        357,
+        249
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": true,
+      "admitted_unknown": false
+    },
+    {
+      "k": 5,
+      "answer": "Telepon pertama kali digunakan di Indonesia pada tanggal 16 Oktober 1882 [1].",
+      "doc_ids": [
+        126,
+        357,
+        249,
+        277,
+        141
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": true,
+      "admitted_unknown": false
+    },
+    {
+      "k": 10,
+      "answer": "Telepon pertama kali digunakan di Indonesia pada tanggal 16 Oktober 1882 [1].",
+      "doc_ids": [
+        126,
+        357,
+        249,
+        277,
+        141,
+        274,
+        307,
+        275,
+        272,
+        15
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": true,
+      "admitted_unknown": false
+    }
+  ],
+  "Kapan telepon pertama kali digunakan di China?": [
+    {
+      "k": 1,
+      "answer": "Tidak tahu.",
+      "doc_ids": [
+        126
+      ],
+      "cited": [],
+      "citation_correct": false,
+      "admitted_unknown": true
+    },
+    {
+      "k": 3,
+      "answer": "Telepon pertama kali digunakan di China pada tanggal 16 Oktober 1882 [1].",
+      "doc_ids": [
+        126,
+        86,
+        74
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": true,
+      "admitted_unknown": false
+    },
+    {
+      "k": 5,
+      "answer": "Telepon pertama kali digunakan di China pada tanggal 16 Oktober 1882 [1].",
+      "doc_ids": [
+        126,
+        86,
+        74,
+        357,
+        315
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": true,
+      "admitted_unknown": false
+    },
+    {
+      "k": 10,
+      "answer": "Telepon pertama kali digunakan di China pada tanggal 16 Oktober 1882 [1].",
+      "doc_ids": [
+        126,
+        86,
+        74,
+        357,
+        315,
+        63,
+        144,
+        123,
+        5,
+        137
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": true,
+      "admitted_unknown": false
+    }
+  ],
+  "apakah nama mata uang Taiwan ?": [
+    {
+      "k": 1,
+      "answer": "Nama mata uang Taiwan adalah New Taiwan Dollar [1].",
+      "doc_ids": [
+        90
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": true,
+      "admitted_unknown": false
+    },
+    {
+      "k": 3,
+      "answer": "Mata uang Taiwan disebut New Taiwan Dollar atau Dolar Baru Taiwan [1].",
+      "doc_ids": [
+        90,
+        86,
+        89
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": true,
+      "admitted_unknown": false
+    },
+    {
+      "k": 5,
+      "answer": "Mata uang Taiwan disebut New Taiwan Dollar dalam bahasa Inggris [1].",
+      "doc_ids": [
+        90,
+        86,
+        89,
+        280,
+        331
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": true,
+      "admitted_unknown": false
+    },
+    {
+      "k": 10,
+      "answer": "Nama mata uang Taiwan adalah New Taiwan Dollar [1].",
+      "doc_ids": [
+        90,
+        86,
+        89,
+        280,
+        331,
+        318,
+        293,
+        74,
+        111,
+        335
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": true,
+      "admitted_unknown": false
+    }
+  ],
+  "Kapan PDI dibubarkan?": [
+    {
+      "k": 1,
+      "answer": "PDI dibubarkan pada tanggal 10 Januari 1973 [1].",
+      "doc_ids": [
+        102
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": true,
+      "admitted_unknown": false
+    },
+    {
+      "k": 3,
+      "answer": "Tidak tahu. [1]",
+      "doc_ids": [
+        102,
+        153,
+        74
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": true,
+      "admitted_unknown": true
+    },
+    {
+      "k": 5,
+      "answer": "Tidak tahu. [1]",
+      "doc_ids": [
+        102,
+        153,
+        74,
+        306,
+        17
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": true,
+      "admitted_unknown": true
+    },
+    {
+      "k": 10,
+      "answer": "PDI dibubarkan pada tanggal 10 Januari 1973 [1].",
+      "doc_ids": [
+        102,
+        153,
+        74,
+        306,
+        17,
+        123,
+        142,
+        58,
+        145,
+        67
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": true,
+      "admitted_unknown": false
+    }
+  ],
+  "Kapan Walt Disney Animation Studios berdiri ?": [
+    {
+      "k": 1,
+      "answer": "Walt Disney Animation Studios berdiri pada tanggal 16 Oktober 1923 [1].",
+      "doc_ids": [
+        288
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": true,
+      "admitted_unknown": false
+    },
+    {
+      "k": 3,
+      "answer": "Walt Disney Animation Studios berdiri pada tanggal 16 Oktober 1923 [1].",
+      "doc_ids": [
+        288,
+        337,
+        59
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": true,
+      "admitted_unknown": false
+    },
+    {
+      "k": 5,
+      "answer": "Walt Disney Animation Studios berdiri pada tanggal 16 Oktober 1923 [1].",
+      "doc_ids": [
+        288,
+        337,
+        59,
+        175,
+        130
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": true,
+      "admitted_unknown": false
+    },
+    {
+      "k": 10,
+      "answer": "Walt Disney Animation Studios berdiri pada tanggal 16 Oktober 1923 [1].",
+      "doc_ids": [
+        288,
+        337,
+        59,
+        175,
+        130,
+        84,
+        146,
+        101,
+        180,
+        268
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": true,
+      "admitted_unknown": false
+    }
+  ],
+  "Siapakah nama suami Sir Alexander Chapman \"Alex\" Ferguson?": [
+    {
+      "k": 1,
+      "answer": "Tidak tahu. [1]",
+      "doc_ids": [
+        294
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": true,
+      "admitted_unknown": true
+    },
+    {
+      "k": 3,
+      "answer": "Tidak tahu. [1]",
+      "doc_ids": [
+        294,
+        277,
+        213
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": true,
+      "admitted_unknown": true
+    },
+    {
+      "k": 5,
+      "answer": "Tidak tahu.",
+      "doc_ids": [
+        294,
+        277,
+        213,
+        242,
+        241
+      ],
+      "cited": [],
+      "citation_correct": false,
+      "admitted_unknown": true
+    },
+    {
+      "k": 10,
+      "answer": "Tidak tahu.",
+      "doc_ids": [
+        294,
+        277,
+        213,
+        242,
+        241,
+        143,
+        135,
+        192,
+        325,
+        256
+      ],
+      "cited": [],
+      "citation_correct": false,
+      "admitted_unknown": true
+    }
+  ],
+  "dari manakah tari angin mamiri berasal?": [
+    {
+      "k": 1,
+      "answer": "Tarian angin mamiri berasal dari Jawa [1].",
+      "doc_ids": [
+        69
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": false,
+      "admitted_unknown": false
+    },
+    {
+      "k": 3,
+      "answer": "Tari Angin Mamiri berasal dari suku Bugis di Sulawesi Selatan [2].",
+      "doc_ids": [
+        69,
+        264,
+        146
+      ],
+      "cited": [
+        2
+      ],
+      "citation_correct": true,
+      "admitted_unknown": false
+    },
+    {
+      "k": 5,
+      "answer": "Tari Angin Mamiri berasal dari suku Bugis di Sulawesi Selatan [2].",
+      "doc_ids": [
+        69,
+        264,
+        146,
+        2,
+        104
+      ],
+      "cited": [
+        2
+      ],
+      "citation_correct": true,
+      "admitted_unknown": false
+    },
+    {
+      "k": 10,
+      "answer": "Tari Angin Mamiri berasal dari suku Bugis di Sulawesi Selatan [2].",
+      "doc_ids": [
+        69,
+        264,
+        146,
+        2,
+        104,
+        134,
+        338,
+        63,
+        131,
+        238
+      ],
+      "cited": [
+        2
+      ],
+      "citation_correct": true,
+      "admitted_unknown": false
+    }
+  ],
+  "Kapan Toko Gunung Agung ditutup?": [
+    {
+      "k": 1,
+      "answer": "Toko Gunung Agung tidak ditutup. [1]",
+      "doc_ids": [
+        180
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": true,
+      "admitted_unknown": false
+    },
+    {
+      "k": 3,
+      "answer": "Toko Gunung Agung ditutup pada tahun 1991 [1].",
+      "doc_ids": [
+        180,
+        343,
+        260
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": true,
+      "admitted_unknown": false
+    },
+    {
+      "k": 5,
+      "answer": "Toko Gunung Agung ditutup pada tahun 1991 [1].",
+      "doc_ids": [
+        180,
+        343,
+        260,
+        199,
+        137
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": true,
+      "admitted_unknown": false
+    },
+    {
+      "k": 10,
+      "answer": "Toko Gunung Agung ditutup pada tahun 1991 [1].",
+      "doc_ids": [
+        180,
+        343,
+        260,
+        199,
+        137,
+        315,
+        175,
+        63,
+        123,
+        236
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": true,
+      "admitted_unknown": false
+    }
+  ],
+  "Apakah jenis hiu terbesar di dunia ?": [
+    {
+      "k": 1,
+      "answer": "Hiu raksasa (Cetorhinus maximus) adalah jenis hiu terbesar di dunia dengan panjang maksimum mencapai 18 meter. [1]",
+      "doc_ids": [
+        6
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": true,
+      "admitted_unknown": false
+    },
+    {
+      "k": 3,
+      "answer": "Hiu terbesar di dunia adalah megalodon, yang dinyatakan memiliki panjang maksimum sekitar 18 meter. [1]",
+      "doc_ids": [
+        6,
+        1,
+        2
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": true,
+      "admitted_unknown": false
+    },
+    {
+      "k": 5,
+      "answer": "Hiu raksasa (Cetorhinus maximus) adalah jenis hiu terbesar di dunia. Panjang maksimumnya mencapai 18 meter, sementara rata-ratanya berkisar pada angka 10,5 meter. [1]",
+      "doc_ids": [
+        6,
+        1,
+        2,
+        317,
+        134
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": true,
+      "admitted_unknown": false
+    },
+    {
+      "k": 10,
+      "answer": "Hiu raksasa (Cetorhinus maximus) adalah jenis hiu terbesar di dunia. [1]",
+      "doc_ids": [
+        6,
+        1,
+        2,
+        317,
+        134,
+        76,
+        285,
+        167,
+        61,
+        305
+      ],
+      "cited": [
+        1
+      ],
+      "citation_correct": true,
+      "admitted_unknown": false
+    }
+  ]
+}
