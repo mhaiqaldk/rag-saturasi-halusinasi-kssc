@@ -5,36 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>RAG Lab · when does an AI make things up?</title>
   <meta name="description" content="Pick a question, choose how many documents an AI reads, and watch when it cites its sources correctly and when it hallucinates. A live research demo by Haiqal and Aldi.">
-  <meta name="theme-color" content="#0F0E13">
+  <meta name="theme-color" content="#FBF9F3">
   <meta property="og:type" content="website">
   <meta property="og:title" content="RAG Lab · Watch an AI make things up">
   <meta property="og:description" content="More documents, more hallucination? Explore 3,000 real answers from an Indonesian RAG system.">
   <meta property="og:url" content="https://rag-saturasi-halusinasi-kssc.vercel.app/">
-  <meta property="og:image" content="https://rag-saturasi-halusinasi-kssc.vercel.app/og.png">
+  <meta property="og:image" content="https://rag-saturasi-halusinasi-kssc.vercel.app/og.png?v=3">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://rag-saturasi-halusinasi-kssc.vercel.app/og.png">
+  <meta name="twitter:image" content="https://rag-saturasi-halusinasi-kssc.vercel.app/og.png?v=3">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-  <main class="wrap">
-    <header class="hero">
-      <div class="glow" aria-hidden="true"></div>
-      <span class="eyebrow">RAG Lab · research demo</span>
-      <h1>Watch an AI make things&nbsp;up</h1>
-      <p>Pick a question, choose how many documents the model reads (K), and see when it cites its sources correctly and when it hallucinates.</p>
-      <a class="repo-link" href="https://github.com/mhaiqaldk/rag-saturasi-halusinasi-kssc" target="_blank" rel="noopener">Read the research ↗</a>
+  <main class="sheet">
+    <header class="masthead">
+      <div class="runhead"><span><b>RAG Lab</b> · interactive working paper</span><span>IDK-MRC · FAISS · Qwen2.5-1.5B</span></div>
+      <h1>Watch an AI <em>make things&nbsp;up</em></h1>
+      <p class="byline">Haiqal Dwikusuma &amp; Aldi · <span>Kapita Selekta Sistem Cerdas</span></p>
+      <p class="abstract"><b>Abstract.</b> An Indonesian question-answering system looks up K documents before it answers and must cite them. Pick a question, choose K, and see when the model cites its sources correctly and when it makes things up. <a href="https://github.com/mhaiqaldk/rag-saturasi-halusinasi-kssc" target="_blank" rel="noopener">Read the full research ↗</a></p>
     </header>
 
     <nav class="tabs" role="tablist" aria-label="Sections">
-      <button role="tab" id="tab-explore" aria-controls="explore" aria-selected="true">Explore</button>
-      <button role="tab" id="tab-compare" aria-controls="compare" aria-selected="false">Compare K</button>
-      <button role="tab" id="tab-findings" aria-controls="findings" aria-selected="false">Findings</button>
+      <button role="tab" id="tab-explore" aria-controls="explore" aria-selected="true"><span class="sec">§1</span>Explore</button>
+      <button role="tab" id="tab-compare" aria-controls="compare" aria-selected="false"><span class="sec">§2</span>Compare K</button>
+      <button role="tab" id="tab-findings" aria-controls="findings" aria-selected="false"><span class="sec">§3</span>Findings</button>
     </nav>
 
     <section id="explore" role="tabpanel" aria-labelledby="tab-explore">
@@ -47,10 +46,15 @@
           </div>
           <div class="label">Documents to read (K)</div>
           <div class="seg" id="k-picker" role="radiogroup" aria-label="Documents to read"></div>
-          <p class="hint">Low K: may miss the source. High K: more noise.</p>
+          <p class="hint">Low K may miss the source. High K adds noise.</p>
           <button id="random" class="btn-secondary" type="button">Random question</button>
           <div class="label examples-label">Try these</div>
           <div id="featured" class="chips"></div>
+          <div class="key" aria-label="How to read the marks">
+            <div><span class="sw-ok">✓</span> correct</div>
+            <div><span class="sw-red">✗ red pen</span> wrong or made up</div>
+            <div><span class="sw-mark">highlight</span> where the answer really is</div>
+          </div>
         </div>
         <div class="output" id="output" aria-live="polite"></div>
       </div>
@@ -59,7 +63,7 @@
     <section id="compare" role="tabpanel" aria-labelledby="tab-compare" hidden></section>
     <section id="findings" role="tabpanel" aria-labelledby="tab-findings" hidden></section>
 
-    <footer class="foot">Built by Haiqal &amp; Aldi · answers generated with Qwen2.5-1.5B-Instruct</footer>
+    <footer class="foot"><span>Haiqal &amp; Aldi · 2026</span><span>Answers generated with Qwen2.5-1.5B-Instruct</span></footer>
   </main>
   <script src="/app.js" defer></script>
 </body>

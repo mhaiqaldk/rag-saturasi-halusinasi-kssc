@@ -34,7 +34,7 @@ function citeChips(answer, r, q, k) {
     let cls = code ? STATUS[code].cls : "pending";
     if (Number(n) > k) cls = "invented";
     if (q && isHallucinatedTrick(q, r) && cls === "supported") cls = "pending";
-    return `<span class="cite cite-${cls}">${n}</span>`;
+    return `<sup class="cite cite-${cls}">${n}</sup>`;
   });
 }
 
@@ -45,6 +45,7 @@ function renderAnswer(q, r, k) {
   const full = r.a;
   if (reduceMotion) {
     box.innerHTML = citeChips(full, r, q, k);
+    $("#answer-note").innerHTML = verdictNote(q, r);
     return;
   }
   // Short typewriter reveal so it feels like the model is answering.
@@ -55,6 +56,7 @@ function renderAnswer(q, r, k) {
     if (i >= full.length) {
       clearInterval(typingTimer);
       box.innerHTML = citeChips(full, r, q, k);
+      $("#answer-note").innerHTML = verdictNote(q, r);
     } else {
       box.innerHTML = esc(full.slice(0, i)) + '<span class="cursor"></span>';
     }
@@ -77,7 +79,7 @@ function renderChecks(q, r, k) {
       ? checkRow(true, "Admitted it doesn't know", "This is the right answer here.")
       : checkRow(false, "Hallucinated an answer", "It answered anyway, so whatever it said is made up."));
   } else {
-    rows.push(checkRow(null, "Expected answer", esc(q.gold)));
+    rows.push(checkRow(null, "Expected answer", `<mark>${esc(q.gold)}</mark>`));
     if (r.idk) rows.push(checkRow(false, "Said it doesn't know", "The answer was in the documents."));
     if (!r.d.includes(q.doc)) {
       rows.push(checkRow(false, "Source passage not retrieved", "Search didn't find it at this K, so the model couldn't see it."));
@@ -100,35 +102,65 @@ function renderChecks(q, r, k) {
 }
 
 // ── Passages ──────────────────────────────────────────────────────────
+function escRe(t) { return t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
+
+// Highlighter: mark where the expected answer appears in the source passage.
+function markGold(html, gold) {
+  const g = esc(gold || "").trim();
+  if (g.length < 2) return html;
+  return html.replace(new RegExp(escRe(g), "gi"), (m) => `<mark>${m}</mark>`);
+}
+
 function renderPassages(q, r) {
   return r.d.map((docId, i) => {
     const n = String(i + 1);
     const cited = n in r.c;
+    const bad = cited && (r.c[n] === "u" || isHallucinatedTrick(q, r) || (q.ans && docId !== q.doc && !r.ok));
+    const isSource = docId === q.doc && q.ans;
     const text = state.passages[docId];
-    const preview = text.length > 220 ? text.slice(0, 220) + "…" : text;
+    let preview = text.length > 240 ? text.slice(0, 240) + "…" : text;
+    if (isSource && q.gold) {
+      // Make sure the highlighted answer is visible in the preview.
+      const at = text.toLowerCase().indexOf(q.gold.toLowerCase());
+      if (at > 180) preview = "…" + text.slice(at - 90, at + 150) + "…";
+    }
     const tags = [
-      cited ? '<span class="tag tag-accent">cited</span>' : "",
-      docId === q.doc ? '<span class="tag">source passage</span>' : "",
+      cited ? `<span class="tag${bad ? " tag-red" : ""}">cited</span>` : "",
+      isSource ? '<span class="tag tag-mark">has the answer</span>' : "",
     ].join("");
-    const more = text.length > 220 ? `<details><summary>Show full passage</summary><p>${esc(text)}</p></details>` : "";
-    return `<div class="passage${cited ? " is-cited" : ""}"><div class="passage-head"><span class="num">[${n}]</span><span class="score">similarity ${r.s[i].toFixed(2)}</span>${tags}</div><p>${esc(preview)}</p>${more}</div>`;
+    const body = (t) => (isSource ? markGold(esc(t), q.gold) : esc(t));
+    const more = text.length > 240 ? `<details><summary>Show full passage</summary><p>${body(text)}</p></details>` : "";
+    return `<div class="passage${cited ? " is-cited" : ""}${bad ? " cite-bad" : ""}"><div class="passage-head"><span class="num">[${n}]</span><span class="score">similarity ${r.s[i].toFixed(2)}</span>${tags}</div><p>${body(preview)}</p>${more}</div>`;
   }).join("");
+}
+
+// Margin note in red pen (or ink, when it got it right).
+function verdictNote(q, r) {
+  if (!q.ans) return r.idk ? '<span class="note good">✓ honest: it doesn\'t know</span>' : '<span class="note">made up!</span>';
+  if (r.idk) return '<span class="note">the answer was there…</span>';
+  return r.ok ? '<span class="note good">✓ right source</span>' : '<span class="note">wrong source</span>';
+}
+
+function qHeader(q, withGold = false) {
+  return `<div class="qcard">
+      <div class="label">Question ${state.qi + 1} of ${state.questions.length}${q.ans ? "" : ' <span class="tag tag-red">trick</span>'}</div>
+      <h2>${esc(q.q)}</h2>
+      ${q.en ? `<p class="en">${esc(q.en)}</p>` : ""}
+      ${withGold ? `<p class="gold">${q.ans ? `Expected answer: <mark>${esc(q.gold)}</mark>` : "<i>No document contains the answer.</i>"}</p>` : ""}
+    </div>`;
 }
 
 // ── Explore tab ───────────────────────────────────────────────────────
 function renderExplore() {
   const q = current();
   const r = run();
+  const madeUp = isHallucinatedTrick(q, r);
   $("#output").innerHTML = `
-    <div class="qcard">
-      <div class="label">Question${q.ans ? "" : ' <span class="tag tag-accent">trick</span>'}</div>
-      <h2>${esc(q.q)}</h2>
-      ${q.en ? `<p class="muted">${esc(q.en)}</p>` : ""}
-    </div>
-    <div class="answer"><div class="label">Model answer · K = ${state.k}</div><p id="answer-text"></p></div>
-    <div class="label section-label">Checks</div>
+    ${qHeader(q)}
+    <div class="answer${madeUp ? " is-madeup" : ""}"><div class="label">Model answer · K = ${state.k}</div><p id="answer-text"></p><div id="answer-note"></div></div>
+    <div class="label section-label"><span>§1.1</span><span>Checks</span></div>
     <div>${renderChecks(q, r, state.k)}</div>
-    <div class="label section-label">Retrieved documents (K = ${state.k})</div>
+    <div class="label section-label"><span>§1.2</span><span>Retrieved documents (K = ${state.k})</span></div>
     <div>${renderPassages(q, r)}</div>`;
   renderAnswer(q, r, state.k);
   document.querySelectorAll("#k-picker button").forEach((b) => b.setAttribute("aria-checked", String(Number(b.dataset.k) === state.k)));
@@ -147,17 +179,13 @@ function renderCompare() {
       ok = r.idk;
       verdict = ok ? "Admitted it doesn't know" : "Hallucinated";
     }
-    return `<div class="k-card ${ok ? "k-ok" : "k-bad"}"><div class="k-head"><span class="k">K = ${k}</span><span class="verdict">${ok ? "✓" : "✗"} ${verdict}</span></div><p>${citeChips(r.a, r, q, k)}</p></div>`;
+    return `<div class="k-card ${ok ? "k-ok" : "k-bad"}${q.ans ? "" : " trick"}"><div class="k-head"><span class="k">K = ${k}</span><span class="verdict">${ok ? "✓" : "✗"} ${verdict}</span></div><p>${citeChips(r.a, r, q, k)}</p></div>`;
   }).join("");
   $("#compare").innerHTML = `
-    <p class="tab-intro">Same question, four values of K. Watch where answers change and where hallucinations appear. Pick another question in Explore and it shows up here.</p>
-    <div class="qcard">
-      <div class="label">Question${q.ans ? "" : ' <span class="tag tag-accent">trick</span>'}</div>
-      <h2>${esc(q.q)}</h2>
-      ${q.en ? `<p class="muted">${esc(q.en)}</p>` : ""}
-      <p>${q.ans ? `Expected answer: <b>${esc(q.gold)}</b>` : "No document contains the answer."}</p>
-    </div>
+    <p class="tab-intro">Same question, four values of K. Watch where the answer changes and where it starts making things up. Pick another question below or in §1.</p>
+    ${qHeader(q, true)}
     <div class="k-grid">${cards}</div>
+    <div class="label section-label"><span>§2.1</span><span>Try another question</span></div>
     <div class="chips compare-chips">${featuredChips()}</div>`;
 }
 
@@ -174,17 +202,23 @@ function demoStats() {
 }
 
 function renderFindings() {
-  const w = 520, h = 240, pad = 36, bw = 70;
-  const gap = (w - 2 * pad - bw * PAPER.length) / (PAPER.length - 1);
+  const w = 560, h = 280, left = 20, base = h - 40, bw = 76;
+  const gap = (w - 2 * left - bw * PAPER.length) / (PAPER.length - 1);
   const bars = PAPER.map((p, i) => {
-    const x = pad + i * (bw + gap);
-    const bh = (h - 70) * p.acc;
-    const y = h - 34 - bh;
-    return `<rect class="${p.k === 10 ? "bar-drop" : "bar"}" x="${x}" y="${y}" width="${bw}" height="${bh}" rx="8"/>
-      <text class="bar-val" x="${x + bw / 2}" y="${y - 8}">${Math.round(p.acc * 100)}%</text>
-      <text class="bar-k" x="${x + bw / 2}" y="${h - 12}">K = ${p.k}</text>`;
+    const x = left + i * (bw + gap);
+    const bh = (base - 50) * p.acc;
+    const y = base - bh;
+    const drop = p.k === 10;
+    return `<rect class="${drop ? "bar-drop" : "bar"}" x="${x}" y="${y}" width="${bw}" height="${bh}"/>
+      <text class="bar-val${drop ? " red" : ""}" x="${x + bw / 2}" y="${y - 10}">${Math.round(p.acc * 100)}%</text>
+      <text class="bar-k" x="${x + bw / 2}" y="${base + 24}">K = ${p.k}</text>`;
   }).join("");
-  const paperRows = PAPER.map((p) => `<tr><td>${p.k}</td><td>${p.rougeL.toFixed(3)}</td><td>${p.bleu.toFixed(3)}</td><td>${p.bert.toFixed(3)}</td><td><b>${Math.round(p.acc * 100)}%</b></td></tr>`).join("");
+  const defs = `<defs>
+      <pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="7" stroke="#1D1B16" stroke-width="1.2" opacity=".55"/></pattern>
+      <pattern id="hatch-red" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="7" stroke="#B42318" stroke-width="2"/></pattern>
+    </defs>`;
+  const best = Math.max(...PAPER.map((p) => p.acc));
+  const paperRows = PAPER.map((p) => `<tr><td>${p.k}</td><td>${p.rougeL.toFixed(3)}</td><td>${p.bleu.toFixed(3)}</td><td>${p.bert.toFixed(3)}</td><td class="${p.k === 10 ? "red" : ""}">${p.acc === best ? "<b>" : ""}${Math.round(p.acc * 100)}%${p.acc === best ? "</b>" : ""}</td></tr>`).join("");
   const demoRows = demoStats().map((s) => `<tr><td>${s.k}</td><td>${Math.round(s.cite * 100)}%</td><td>${Math.round(s.idk * 100)}%</td></tr>`).join("");
   const nAns = state.questions.filter((q) => q.ans).length;
   const nTrick = state.questions.length - nAns;
@@ -192,33 +226,43 @@ function renderFindings() {
   $("#findings").innerHTML = `
     <div class="findings">
       <div class="big-numbers">
-        <div><span class="big">76%</span><span>citation accuracy at K = 5, the best setting</span></div>
-        <div><span class="big accent">36%</span><span>at K = 10: more documents, half the accuracy</span></div>
+        <div><span class="big">76%</span><span>citation accuracy with 5 documents, the best setting</span></div>
+        <div><span class="big red">36%</span><span>with 10 documents: more reading, half the accuracy</span></div>
       </div>
-      <div class="card"><div class="label">Citation accuracy by K (paper)</div>
-        <svg viewBox="0 0 ${w} ${h}" role="img" aria-label="Citation accuracy by K: 67%, 70%, 76%, 36%">${bars}</svg></div>
-      <div class="card takeaways"><div class="label">What we found</div><ol>
+
+      <h3><span class="mono">§3.1</span>Citation accuracy by K</h3>
+      <figure>
+        <svg viewBox="0 0 ${w} ${h}" role="img" aria-label="Citation accuracy by K: 67%, 70%, 76%, 36%">${defs}${bars}<line class="axis" x1="0" y1="${base}" x2="${w}" y2="${base}"/></svg>
+        <figcaption><b>Figure 1.</b> Share of answers that cite the passage holding the answer, 100 questions per K (from the paper). Accuracy climbs up to K = 5, then collapses at K = 10.</figcaption>
+      </figure>
+
+      <h3><span class="mono">§3.2</span>What we found</h3>
+      <ol class="takeaways">
         <li><b>More context helps, up to a point.</b> Going from 1 to 5 documents made citations more accurate.</li>
         <li><b>Then it collapses.</b> At 10 documents the model loses track of where facts came from and cites the wrong one most of the time.</li>
         <li><b>Answer quality saturates too.</b> ROUGE, BLEU and BERTScore stay flat and then drop at K = 10, as irrelevant passages distract the model.</li>
-      </ol></div>
-      <div class="card"><div class="label">Paper results (100 questions per K)</div>
-        <div class="table-wrap"><table><thead><tr><th>K</th><th>ROUGE-L</th><th>BLEU</th><th>BERTScore F1</th><th>Citation acc.</th></tr></thead><tbody>${paperRows}</tbody></table></div></div>
-      <div class="card"><div class="label">This demo's run (all ${state.questions.length} questions)</div>
-        <div class="table-wrap"><table><thead><tr><th>K</th><th>Cited the source (${nAns} answerable)</th><th>Admitted "don't know" (${nTrick} trick)</th></tr></thead><tbody>${demoRows}</tbody></table></div>
-        <p class="muted small">Computed live in your browser from the answers on this site. The demo uses an improved prompt, so its numbers differ from the paper.</p></div>
-      <div class="card credits"><div class="label">About this project</div>
+      </ol>
+
+      <h3><span class="mono">§3.3</span>Results</h3>
+      <div class="table-wrap"><table><thead><tr><th>K</th><th>ROUGE-L</th><th>BLEU</th><th>BERTScore F1</th><th>Citation acc.</th></tr></thead><tbody>${paperRows}</tbody></table></div>
+      <p class="small muted"><b>Table 1.</b> Paper results, 100 questions per K.</p>
+      <div class="table-wrap"><table><thead><tr><th>K</th><th>Cited the source (${nAns} answerable)</th><th>Admitted "don't know" (${nTrick} trick)</th></tr></thead><tbody>${demoRows}</tbody></table></div>
+      <p class="small muted"><b>Table 2.</b> This demo's run on all ${state.questions.length} questions, computed live in your browser. The demo uses an improved prompt, so its numbers differ from the paper.</p>
+
+      <h3><span class="mono">§3.4</span>About this project</h3>
+      <div class="credits">
         <p>Final assignment for <i>Kapita Selekta Sistem Cerdas</i> by <b>Aldi</b> (retrieval pipeline) and <b>Haiqal</b> (generation, evaluation and this demo).</p>
         <p>Dataset: <a href="https://huggingface.co/datasets/rifkiaputri/idk-mrc" target="_blank" rel="noopener">IDK-MRC</a> (Indonesian; half the questions have no answer). Search: multilingual MiniLM embeddings + FAISS. Model: Qwen2.5-1.5B-Instruct.</p>
-        <p class="muted small">Every answer on this site was generated ahead of time by the model, for all ${state.questions.length} questions at each K, so pages load instantly. The demo uses Qwen's chat format and strips Wikipedia footnote marks like "[1]" from passages, so its answers are cleaner than in the paper.</p>
-        <p><a href="https://github.com/mhaiqaldk/rag-saturasi-halusinasi-kssc" target="_blank" rel="noopener">Notebook, report and code on GitHub →</a></p></div>
+        <p class="small muted">Every answer on this site was generated ahead of time by the model, for all ${state.questions.length} questions at each K, so pages load instantly. The demo uses Qwen's chat format and strips Wikipedia footnote marks like "[1]" from passages, so its answers are cleaner than in the paper.</p>
+        <p><a href="https://github.com/mhaiqaldk/rag-saturasi-halusinasi-kssc" target="_blank" rel="noopener">Notebook, report and code on GitHub ↗</a></p>
+      </div>
     </div>`;
 }
 
 // ── Navigation, search and state ──────────────────────────────────────
 function featuredChips() {
   return state.questions
-    .map((q, i) => (q.en ? `<button type="button" class="chip" data-qi="${i}">${esc(q.en)}${q.ans ? "" : '<span class="chip-tag">trick</span>'}</button>` : ""))
+    .map((q, i) => (q.en ? `<button type="button" class="chip" data-qi="${i}"><span>${esc(q.en)}${q.ans ? "" : '<span class="chip-tag">trick</span>'}</span></button>` : ""))
     .join("");
 }
 
